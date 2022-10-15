@@ -46,12 +46,18 @@ if (top == -1){
 }
 
 int DISPLAY(int stack[]){
-	printf(" Isi Stack Elements: \n");
-  	if(ISEMPTY()) {
+  if(ISEMPTY()) {
      printf("\n Stack Kosong\n");
    }else{
-   	for(i=top;i>=0;--i)
-   		printf(" %d ",stack[i]);
+   	for (int l = 0; l <= count; l++)
+       		arr[l]=stack[l];
+    		int k = 0;
+
+    		SelectionSort(arr, 0, 0, count, 1);
+
+    		printf("\n Data sesudah sorting: \n");
+    	for (k = 0; k < count; k++)
+       		printf(" %d ", arr[k]);
    }
    printf("\n");
    	
@@ -152,17 +158,8 @@ int top = -1;
             	scanf("%d",&i);
             	PUSH(stack,i);
    				
-   				for (int l = 0; l <= count; l++)
-       			arr[l]=stack[l];
-    			int k = 0;
-				DISPLAY(stack);
-    			SelectionSort(arr, 0, 0, count, 1);
-
-    			printf("\n Data sesudah sorting: \n");
-    			for (k = 0; k < count; k++)
-       			printf(" %d ", arr[k]);
-       			
-   				getch(); system("cls");
+   		DISPLAY(stack);
+   		getch(); system("cls");
                 break;
             }
             case 4:
