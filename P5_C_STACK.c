@@ -6,17 +6,28 @@
 int stack[8],choice,n,x,i;
 int data;
 int top = -1; 
+int count = 0;
+int arr[8];
 
-int DISPLAY(int stack[]){
-	printf("Isi Stack Elements: \n");
-  	if(ISEMPTY()) {
-     printf("\n Stack Kosong\n");
-   }else{
-   	for(i=top;i>=0;--i)
-   		printf("\n %d",stack[i]);
-   }
-   printf("\n");
+void SelectionSort(int arr[], int k, int j, int length, int flag)
+{
+    if (k < length - 1) {
+        if (flag == 1)
+            j = k + 1;
+
+        if (j < length) {
+            if (arr[k] > arr[j]) //proses penyortingan
+            {
+                arr[k] = arr[k] + arr[j];
+                arr[j] = arr[k] - arr[j];
+                arr[k] = arr[k] - arr[j];
+            }
+            SelectionSort(arr, k, j + 1, length, 0);
+        }
+        SelectionSort(arr, k + 1, 0, length, 1);
+    }
 }
+
 
 int ISEMPTY()
 {
@@ -31,6 +42,31 @@ if (top == -1){
 	}	
 	
 
+}
+
+int DISPLAY(int stack[]){
+	printf("Isi Stack Elements: \n");
+  	if(ISEMPTY()) {
+     printf("\n Stack Kosong\n");
+   }else{
+    for (int l = 0; l <= count; l++)
+       arr[l]=stack[l];
+    int k = 0;
+	for (k = 0; k < count; k++)
+        printf("%d  \n\n", arr[k]);
+    printf("Array sebelum sorting: \n");
+    for (k = 0; k < count; k++)
+        printf("%d  ", arr[k]);
+
+    SelectionSort(arr, 0, 0, count, 1);
+
+    printf("\nArray sesudah sorting: \n");
+    for (k = 0; k < count; k++)
+        printf("%d  ", arr[k]);
+
+    printf("\n");
+   }
+   printf("\n");
 }
 
 int ISFULL()
@@ -52,7 +88,8 @@ int PUSH(int stack[],int i){
    if(top==(max-1)){;
     printf("Tidak Bisa Menambahkan Data STACK full.\n");
    } else {
-	++top;   
+	++top;
+	count++;   
     stack[top] = i;
    }
 }
@@ -62,7 +99,8 @@ int POP(int stack[]) {
 	data=0;
 	}else{
 		data = stack[top];
-    	--top;   		
+    	--top;
+		count--;   		
 	}
     return data;
 }
@@ -148,7 +186,7 @@ int top = -1;
             {
                 printf("\nExiting...");
                 break;
-            }
+            }	
             default:
             {
                 printf ("\n Masukkan Pilihan Yang Valid Bu(1/2/3/4/5/6)");
@@ -157,5 +195,9 @@ int top = -1;
         }
     }
     while(choice!=7);
+
+
+
     return 0;
 }
+
